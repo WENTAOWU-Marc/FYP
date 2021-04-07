@@ -56,6 +56,13 @@ router.post('/update', function (req, res, next) {
         res.send({ code: 200, msg: 'ok' })
     })
 });
+router.get('/del', function (req, res, next) {
+    var { _id } = req.body;
+
+    foodsSchema.findByIdAndRemove(_id, function (err, doc) {
+        return res.send({ code: 200, msg: 'success' })
+    })
+});
 
 
 

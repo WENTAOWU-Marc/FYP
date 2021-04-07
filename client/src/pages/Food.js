@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 export default function Food () {
+    const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {}
     const { restId } = useParams()
 
     const [list, setList] = useState([])
@@ -23,7 +24,8 @@ export default function Food () {
             [e.target.name]: e.target.value,
         })
     }
-    const onChange = (e) => {
+    const onChange = (e, obj) => {
+        obj.number = e
 
     }
     const editInfo = (e) => {
@@ -38,8 +40,41 @@ export default function Food () {
         })
     };
     const toBuy = e => {
-        console.log('e -> :', e)
-        var { restId, _id, name } = e
+        var { restId, _id, name, number } = e;
+
+        var userId = user._id
+
+        var data = {
+            restId,
+            foodId: _id,
+            name,
+            userId,
+            status: 1,
+            number
+        }
+        console.log('data -> :', data)
+
+        fetch('/order/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .then(res => res.json())
+            .then(res => {
+                window.location.reload()
+            })
+    };
+
+    const delInfo = e => {
+        var { _id, } = e;
+
+        fetch('/food/del?_id=' + _id)
+            .then(res => res.json())
+            .then(res => {
+                window.location.reload()
+            })
     };
 
     const [error, seterror] = useState('')
@@ -127,7 +162,7 @@ export default function Food () {
                 <Row style={{ margin: '10px' }} gutter={16}>
                     {
                         list.map((it, index) => (
-                            <Col span={8} key={index}>
+                            <Col span={8} key={index} style={{ margin: '10px 0' }}>
                                 <Card
                                     cover={
                                         <img
@@ -137,15 +172,16 @@ export default function Food () {
                                     }
                                     actions={[
                                         <span key="edit" onClick={() => editInfo(it)}>edit</span>,
+                                        <span key="del" onClick={() => delInfo(it)}>del</span>,
                                         <span key="buy">
-                                            <InputNumber min={1} max={10} onChange={onChange} />
+                                            <InputNumber style={{width:"50px"}} min={1} onChange={(e) => onChange(e, it)} />
                                             <button onClick={() => toBuy(it)}>Buy</button>
                                         </span>
                                     ]}
                                 >
                                     <Card.Meta
-                                        title={it.name}
-                                        description={it.type}
+                                        title={it.name + ' - $' + it.price}
+                                        description={it.type }
                                     />
                                 </Card>
                             </Col>
