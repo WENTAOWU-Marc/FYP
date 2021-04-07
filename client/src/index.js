@@ -14,6 +14,7 @@ const Home = lazy(() => import("./pages/Home"))
 const RestList = lazy(() => import("./pages/RestList"))
 const AddRest = lazy(() => import("./pages/AddRest"))
 const Food = lazy(() => import("./pages/Food"))
+const Order = lazy(() => import("./pages/Order"))
 
 const App = () => {
     return (
@@ -31,6 +32,7 @@ const App = () => {
                         <Route path='/postRest' component={AddRest} />
 
                         <Route path='/foods/:restId' component={Food} />
+                        <Route path='/orders' component={Order} />
                         <Route path='/' component={Home} />
                         <Redirect from="*" to="/" />
                     </Switch>

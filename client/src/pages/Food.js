@@ -24,8 +24,18 @@ export default function Food () {
             [e.target.name]: e.target.value,
         })
     }
-    const onChange = (e, obj) => {
+    const onChange = (e, obj, index) => {
         obj.number = e
+        obj.totalPrice = Number(obj.number) * Number(obj.price)
+        var newList = list.map(it => {
+            if (it._id == obj._id) {
+                it = { ...obj }
+            }
+            return it
+        })
+        setList([
+            ...newList
+        ])
 
     }
     const editInfo = (e) => {
@@ -40,7 +50,7 @@ export default function Food () {
         })
     };
     const toBuy = e => {
-        var { restId, _id, name, number } = e;
+        var { restId, _id, name, number, totalPrice } = e;
 
         var userId = user._id
 
@@ -50,7 +60,8 @@ export default function Food () {
             name,
             userId,
             status: 1,
-            number
+            number,
+            totalPrice
         }
         console.log('data -> :', data)
 
@@ -123,7 +134,12 @@ export default function Food () {
             fetch('/food/all?restId=' + restId)
                 .then(res => res.json())
                 .then(res => {
-                    setList(res.data)
+                    var data = res.data.map(it => {
+                        it.totalPrice = 0;
+                        it.number = null;
+                        return it
+                    })
+                    setList(data)
                 })
         }
         getlist()
@@ -164,6 +180,7 @@ export default function Food () {
                         list.map((it, index) => (
                             <Col span={8} key={index} style={{ margin: '10px 0' }}>
                                 <Card
+                                    hoverable
                                     cover={
                                         <img
                                             alt="example"
@@ -173,16 +190,16 @@ export default function Food () {
                                     actions={[
                                         <span key="edit" onClick={() => editInfo(it)}>edit</span>,
                                         <span key="del" onClick={() => delInfo(it)}>del</span>,
-                                        <span key="buy">
-                                            <InputNumber style={{width:"50px"}} min={1} onChange={(e) => onChange(e, it)} />
-                                            <button onClick={() => toBuy(it)}>Buy</button>
-                                        </span>
+                                        <span key="buy" onClick={() => toBuy(it)}> Buy </span>
                                     ]}
                                 >
                                     <Card.Meta
-                                        title={it.name + ' - $' + it.price}
-                                        description={it.type }
+                                        title={it.name}
+                                        description={it.type}
                                     />
+                                    <p>$ {it.price}</p>
+                                    <InputNumber min={1} onChange={(e) => onChange(e, it, index)} />
+                                    <p>$ {it.totalPrice}</p>
                                 </Card>
                             </Col>
                         ))
