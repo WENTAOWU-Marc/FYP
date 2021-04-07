@@ -1,7 +1,7 @@
 'use strict'
 var mongoose = require('./config');
 
-// 创建schema
+// create schema
 const classSchema = new mongoose.Schema({
     name: String,
     type: String,
@@ -9,7 +9,7 @@ const classSchema = new mongoose.Schema({
     restId: String,
     price: Number,
 })
-// 创建model
+// create model
 const classModel = mongoose.model('food', classSchema) // newClass为创建或选中的集合
 
 module.exports = classModel

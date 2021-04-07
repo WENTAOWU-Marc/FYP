@@ -1,7 +1,7 @@
 'use strict'
 var mongoose = require('./config');
 
-// 创建schema
+// create schema
 const classSchema = new mongoose.Schema({
     name: String,
     imgUrl: String,
@@ -11,7 +11,7 @@ const classSchema = new mongoose.Schema({
     longitude: String,
     latitude: String,
 })
-// 创建model
+// create model
 const classModel = mongoose.model('rest', classSchema) // newClass为创建或选中的集合
 
 module.exports = classModel
