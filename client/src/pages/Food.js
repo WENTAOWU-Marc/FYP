@@ -37,6 +37,10 @@ export default function Food () {
             [e.target.name]: e.target.files[0],
         })
     };
+    const toBuy = e => {
+        console.log('e -> :', e)
+        var { restId, _id, name } = e
+    };
 
     const [error, seterror] = useState('')
 
@@ -64,19 +68,18 @@ export default function Food () {
 
         food.price = Number(food.price)
 
-        console.log('shop -> :', food)
 
-        // fetch('/food/add', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify(food)
-        // })
-        //     .then(res => res.json())
-        //     .then(res => {
-        //         window.location.reload()
-        //     })
+        fetch('/food/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(food)
+        })
+            .then(res => res.json())
+            .then(res => {
+                window.location.reload()
+            })
     }
 
 
@@ -136,7 +139,7 @@ export default function Food () {
                                         <span key="edit" onClick={() => editInfo(it)}>edit</span>,
                                         <span key="buy">
                                             <InputNumber min={1} max={10} onChange={onChange} />
-                                            <button>Buy</button>
+                                            <button onClick={() => toBuy(it)}>Buy</button>
                                         </span>
                                     ]}
                                 >
