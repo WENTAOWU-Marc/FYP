@@ -5,13 +5,12 @@ var moment = require('moment')
 
 // create schema
 const classSchema = new mongoose.Schema({
+    foods: Array,
     restId: String,
-    foodId: String,
-    userId: String,
-    name: String,
     status: Number,
-    number: Number,
     totalPrice: Number,
+    userId: String,
+
     createTime: { type: String, default: moment().format("YYYY-MM-DD HH:MM:ss") }
 })
 // create model
