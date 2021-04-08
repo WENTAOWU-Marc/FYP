@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { useFirebaseApp } from 'reactfire';
-import 'firebase/auth'
 import { Link } from 'react-router-dom';
 
 const Login = () => {
@@ -8,69 +6,50 @@ const Login = () => {
     const [user, setUser] = useState({
         email: '',
         password: '',
-        error: '',
         role: '1',
     });
+
+    const [error, seterror] = useState('')
 
     // onChange function
     const handleChange = e => {
         setUser({
             ...user,
             [e.target.name]: e.target.value,
-            error: '',
         })
     };
 
-    // Import firebase
-    const firebase = useFirebaseApp();
-
     // Submit function (Log in user)
     const handleSubmit = e => {
-        let name = "";
         e.preventDefault();
-        // Log in code here.
-        firebase.auth().signInWithEmailAndPassword(user.email, user.password)
-            .then(result => {
-                var userInfo = {
-                    name: result.user.displayName,
-                    email: result.user.email,
-                    id: result.user.uid,
-                    role: user.role,
-                }
-                localStorage.setItem('user', JSON.stringify(userInfo))
 
-                window.location.replace("/home");
+        if (
+            !user.email ||
+            !user.password
+        ) {
+            seterror('Parameter cannot be empty');
+            return false;
+        }
 
-                // if (!result.user.emailVerified) {
-                //     setUser({
-                //         ...user,
-                //         error: 'Please verify your email before to continue',
-                //     })
-                //     firebase.auth().signOut();
-                // }
-
-
-                // if (result.operationType === "signIn") {
-                //     name = result.user.displayName
-                //     console.log(name)
-                //     console.log(result.user)
-                //     window.location.replace("./");
-                // }
-
-            })
-            .catch(error => {
-                var errorCode = error.code;
-                // var errorMessage = error.message;
-                if (errorCode === 'auth/wrong-password') {
-                    alert('Wrong password.');
+        fetch('/users/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(res => {
+                if (res.code == 200) {
+                    var final = {
+                        ...res.data,
+                        role: user.role
+                    }
+                    localStorage.setItem('user', JSON.stringify(final))
+                    window.location.href = "/"
                 } else {
-                    console.log(error);
+                    seterror(res.msg)
                 }
-                // Update the error
-                setUser({
-                    ...user,
-                    error: error.message,
-                })
             })
 
     }
@@ -105,10 +84,10 @@ const Login = () => {
                 </p>
                 <button type="submit">Login</button>
             </form>
-            <Link to='signup'>
+            <Link to='/check'>
                 <button>Sign up</button>
             </Link>
-            {user.error && <h4>{user.error}</h4>}
+            {error && <h4>{error}</h4>}
         </>
     )
 

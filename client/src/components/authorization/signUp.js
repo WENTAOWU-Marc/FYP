@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import { useFirebaseApp } from 'reactfire';
-import 'firebase/auth'
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 // import './Signup.css' ;
 
@@ -8,91 +7,53 @@ import 'firebase/auth'
 const Signup = () => {
     // User State
     const [user, setUser] = useState({
-        nickname: '',
-        email: '',
+        name: '',
+        email: localStorage.getItem('email'),
         password: '',
-        error: '',
+        tel: '',
+        address: '',
+        longitude: '',
+        latitude: '',
     });
 
+    const [error, seterror] = useState('')
 
     const handleChange = e => {
         setUser({
             ...user,
             [e.target.name]: e.target.value,
-            error: '',
         })
     };
 
-    const firebase = useFirebaseApp();
-
     // onChange function
     const handleSubmit = async (e) => {
-
         e.preventDefault();
 
+        if (
+            !user.name ||
+            !user.email ||
+            !user.password ||
+            !user.address ||
+            !user.tel ||
+            !user.latitude ||
+            !user.longitude
+        ) {
+            seterror('Parameter cannot be empty');
+            return false;
+        }
 
-        var actionCodeSettings = {
-            // URL you want to redirect back to. The domain (www.example.com) for this
-            // URL must be in the authorized domains list in the Firebase Console.
-            url: 'http://localhost:3000/signup',
-            // This must be true.
-            handleCodeInApp: true,
-        };
-
-        firebase.auth().sendSignInLinkToEmail(user.email, actionCodeSettings)
-            .then(() => {
-                console.log('user.email -> :', user.email)
-                // The link was successfully sent. Inform the user.
-                // Save the email locally so you don't need to ask the user for it again
-                // if they open the link on the same device.
-                window.localStorage.setItem('email', user.email);
-                // ...
+        fetch('/users/reg', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(res => {
+                seterror(res.msg)
             })
-            .catch((error) => {
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                console.log('errorMessage -> :', errorMessage)
-            });
-
-
-
-        // Sign up code here.
-        // await firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
-        //     .then(result => {
-        //         // Update the nickname
-        //         result.user.updateProfile({
-        //             displayName: user.nickname,
-        //         });
-
-        //         // URL of my website.
-        //         const myURL = { url: 'http://localhost:3000/' }
-
-        //         // Send Email Verification and redirect to my website.
-        //         result.user.sendEmailVerification(myURL)
-        //             .then(() => {
-        //                 setUser({
-        //                     ...user,
-        //                     verifyEmail: `Welcome ${user.nickname} . To continue please verify your email.`,
-        //                 })
-        //             })
-        //             .catch(error => {
-        //                 setUser({
-        //                     ...user,
-        //                     error: error.message,
-        //                 })
-        //             })
-        //         window.location.replace("/");
-        //         // Sign Out the user.
-        //         // firebase.auth().signOut();
-        //     }).catch(error => {
-        //         // Update the error
-        //         setUser({
-        //             ...user,
-        //             error: error.message,
-        //         })
-        //     })
     }
-
 
     return (
         <>
@@ -100,20 +61,39 @@ const Signup = () => {
             <form onSubmit={handleSubmit}>
                 <p>
                     name:
-                    <input type="text" placeholder="Nickname" name="nickname" onChange={handleChange} />
+                    <input type="text" placeholder="Name" name="name" onChange={handleChange} />
                 </p>
                 <p>
                     email:
-                    <input type="text" placeholder="Email" name="email" onChange={handleChange} />
+                    <input readOnly type="text" placeholder="Email" value={user.email} name="email" onChange={handleChange} />
                 </p>
                 <p>
                     password:
                     <input type="password" placeholder="Password" name="password" onChange={handleChange} />
                 </p>
+                <p>
+                    tel:
+                    <input type="tel" placeholder="tel" name="tel" onChange={handleChange} />
+                </p>
+                <p>
+                    address:
+                    <input type="text" placeholder="address" name="address" onChange={handleChange} />
+                </p>
+                <p>
+                    longitude:
+                    <input type="number" step="0.0000001" placeholder="longitude" name="longitude" onChange={handleChange} />
+                </p>
+                <p>
+                    latitude:
+                    <input type="number" step="0.0000001" placeholder="latitude" name="latitude" onChange={handleChange} />
+                </p>
 
                 <button type="submit">Sign Up</button>
+                <Link to='/'>
+                    <button>Login</button>
+                </Link>
             </form>
-            {user.error && <h4>{user.error}</h4>}
+            {error && <h4>{error}</h4>}
         </>
     )
 };

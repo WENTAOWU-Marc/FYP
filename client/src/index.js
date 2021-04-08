@@ -7,7 +7,7 @@ import "../node_modules/bootstrap/dist/css/bootstrap.css";
 
 const LoginPage = lazy(() => import("./components/authorization/login"))
 const Signup = lazy(() => import("./components/authorization/signUp"))
-const Check = lazy(() => import("./components/authorization/Check"))
+const Check = lazy(() => import("./components/authorization/check"))
 const SiteHeader = lazy(() => import("./components/Header"))
 const UserInfo = lazy(() => import("./pages/UserInfo"))
 const Home = lazy(() => import("./pages/Home"))
