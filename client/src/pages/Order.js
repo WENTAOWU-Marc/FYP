@@ -24,9 +24,9 @@ export default function Food () {
                 console.log('data -> :', data)
                 setList(data)
             })
+
     }
     useEffect(() => {
-
         getlist()
     }, [])
 

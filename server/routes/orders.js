@@ -8,8 +8,9 @@ var usersSchema = require('../db/user.model')
 
 /* GET users listing. */
 router.get('/all', async function (req, res, next) {
-    var orderArr = await ordersSchema.find({}, null, { lean: true })
+    var orderArr;
     var objArrr = []
+    var orderArr = await ordersSchema.find({ userId }, null, { lean: true })
     orderArr.map(async it => {
         var neo = { ...it }
         var ress = await restsSchema.find({ _id: it.restId }, null, { lean: true })

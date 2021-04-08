@@ -29,16 +29,25 @@ const SiteHeader = () => {
                         Restaurant lists
                     </Link>
                 </li>
-                <li className="nav-item li-no-style">
-                    <Link className=" text-white" to="/postRest">
-                        Add Restaurant
+                {
+                    user && user.role == 2 &&
+                    <li className="nav-item li-no-style">
+                        <Link className=" text-white" to="/postRest">
+                            Add Restaurant
                     </Link>
-                </li>
-                <li className="nav-item li-no-style">
-                    <Link className=" text-white" to="/orders">
-                        Order lists
+                    </li>
+                }
+                {
+                    user &&
+                    <li className="nav-item li-no-style">
+                        <Link className=" text-white" to="/orders">
+                            Order lists
                     </Link>
-                </li>
+                    </li>
+                }
+
+
+
             </ul>
 
             <nav className="navbar navbar-expand ">

@@ -3,10 +3,11 @@ import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 export default function Food () {
-    const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {}
+    const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : ''
     const { restId } = useParams()
 
     const [list, setList] = useState([])
+    const [info, setInfo] = useState({})
 
     const [file, setFile] = useState(null)
     const [food, setFood] = useState({
@@ -50,6 +51,12 @@ export default function Food () {
         })
     };
     const toBuy = e => {
+
+        if (!user) {
+            window.location.href = '/login'
+        }
+
+
         var { restId, _id, name, number, totalPrice } = e;
 
         var userId = user._id
@@ -141,6 +148,14 @@ export default function Food () {
                     })
                     setList(data)
                 })
+
+            fetch('/rest/all?_id=' + restId)
+                .then(res => res.json())
+                .then(res => {
+                    console.log('data[0] -> :', res.data[0])
+                    setInfo(res.data[0])
+                })
+
         }
         getlist()
     }, [])
@@ -148,31 +163,47 @@ export default function Food () {
     return (
         <div>
             <div>
-                <h1>Create a foods</h1>
-                <form onSubmit={handleSubmit}>
-                    <p>
-                        name:
-                        <input type="text" value={food.name} placeholder="Name" name="name" onChange={handleChange} />
-                    </p>
-                    <p>
-                        imgUrl:
-                        <input type="file" name="file" onChange={fileChange} />
-                    </p>
-                    <p>
-                        price:
-                        <input type="number" value={food.price} placeholder="price" name="price" onChange={handleChange} />
-                    </p>
-                    <p>
-                        type:
-                        <select name="type" value={food.type} onChange={handleChange}>
-                            <option value="vegetables">vegetables</option>
-                            <option value="meat">meat</option>
-                        </select>
-                    </p>
-                    <button type="submit">Create</button>
-                </form>
+                <p>
+                    Name:{info.name}
+                </p>
+                <p>
+                    address:{info.address}
+                </p>
+                <p>
+                    tel:{info.tel}
+                </p>
+                <p>
+                    type:{info.type}
+                </p>
             </div>
-
+            {
+                user && user.role == 2 &&
+                <div>
+                    <h1>Create a foods</h1>
+                    <form onSubmit={handleSubmit}>
+                        <p>
+                            name:
+                        <input type="text" value={food.name} placeholder="Name" name="name" onChange={handleChange} />
+                        </p>
+                        <p>
+                            imgUrl:
+                        <input type="file" name="file" onChange={fileChange} />
+                        </p>
+                        <p>
+                            price:
+                        <input type="number" value={food.price} placeholder="price" name="price" onChange={handleChange} />
+                        </p>
+                        <p>
+                            type:
+                        <select name="type" value={food.type} onChange={handleChange}>
+                                <option value="vegetables">vegetables</option>
+                                <option value="meat">meat</option>
+                            </select>
+                        </p>
+                        <button type="submit">Create</button>
+                    </form>
+                </div>
+            }
 
             <div>
                 <Row style={{ margin: '10px' }} gutter={16}>
@@ -188,8 +219,8 @@ export default function Food () {
                                         />
                                     }
                                     actions={[
-                                        <span key="edit" onClick={() => editInfo(it)}>edit</span>,
-                                        <span key="del" onClick={() => delInfo(it)}>del</span>,
+                                        (user && user.role == 2) ? <span key="edit" onClick={() => editInfo(it)}>edit</span> : null,
+                                        (user && user.role == 2) ? <span key="del" onClick={() => delInfo(it)}>del</span> : null,
                                         <span key="buy" onClick={() => toBuy(it)}> Buy </span>
                                     ]}
                                 >
@@ -205,8 +236,8 @@ export default function Food () {
                         ))
                     }
                 </Row>
-            </div>
+            </div >
 
-        </div>
+        </div >
     )
 }

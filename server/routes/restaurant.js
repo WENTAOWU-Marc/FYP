@@ -6,12 +6,23 @@ var restsSchema = require('../db/restaurant.model')
 
 /* GET users listing. */
 router.get('/all', function (req, res, next) {
-    restsSchema.find(
-        {},
-        (err, doc) => {
-            console.log('err -> :', err)
-            res.json({ code: 200, data: doc })
-        })
+    var { _id } = req.query
+    if (_id) {
+        restsSchema.find(
+            { _id },
+            (err, doc) => {
+                console.log('err -> :', err)
+                res.json({ code: 200, data: doc })
+            })
+    } else {
+        restsSchema.find(
+            {},
+            (err, doc) => {
+                console.log('err -> :', err)
+                res.json({ code: 200, data: doc })
+            })
+    }
+
 });
 
 router.post('/add', function (req, res, next) {
