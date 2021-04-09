@@ -44,15 +44,10 @@ export default function Food () {
                 <thead>
                     <tr>
                         <th>Index</th>
-                        <th>Food Name</th>
-                        <th>Food Price</th>
-                        <th>Food Number</th>
                         <th>Restaurant Name</th>
                         <th>Restaurant Tel</th>
                         <th>Restaurant Address</th>
-                        <th>User Name</th>
-                        <th>User Tel</th>
-                        <th>User Address</th>
+                        <th>Order TotalPrice</th>
                         <th>Order Status</th>
                         {
                             user.role == 1 &&
@@ -64,16 +59,11 @@ export default function Food () {
                     {
                         list.map((it, index) => (
                             <tr key={index}>
-                                <td>{index + 1}</td>
-                                <td>{it.name}</td>
-                                <td>{it.totalPrice}</td>
-                                <td>{it.number}</td>
+                                <td><Link to={'/orders/' + it._id}>{index + 1}</Link> </td>
                                 <td>{it.restName}</td>
                                 <td>{it.restTel}</td>
                                 <td>{it.restAddress}</td>
-                                <td>{it.userName}</td>
-                                <td>{it.userTel}</td>
-                                <td>{it.userAddress}</td>
+                                <td>{it.totalPrice}</td>
                                 <td>{status[it.status]}</td>
                                 <td>
                                     {

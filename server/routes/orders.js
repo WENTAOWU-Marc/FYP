@@ -9,7 +9,13 @@ var usersSchema = require('../db/user.model')
 /* GET users listing. */
 router.get('/all', async function (req, res, next) {
     var objArrr = []
-    var orderArr = await ordersSchema.find({  }, null, { lean: true })
+    var { _id } = req.query
+    var orderArr
+    if (_id) {
+        orderArr = await ordersSchema.find({ _id }, null, { lean: true })
+    } else {
+        orderArr = await ordersSchema.find({}, null, { lean: true })
+    }
     orderArr.map(async it => {
         var neo = { ...it }
         var ress = await restsSchema.find({ _id: it.restId }, null, { lean: true })
@@ -33,17 +39,15 @@ router.get('/all', async function (req, res, next) {
 });
 
 router.post('/add', function (req, res, next) {
-    var { name, foodId, restId, userId, status, number, totalPrice } = req.body;
+    var { foods, restId, userId, status, totalPrice } = req.body;
 
 
     var obj = new ordersSchema({
+        foods,
         restId,
-        foodId,
-        name,
-        userId,
         status,
-        number,
-        totalPrice
+        totalPrice,
+        userId,
     })
 
 
