@@ -5,7 +5,7 @@ import { FirebaseAppProvider } from 'reactfire';
 import firebaseConfig from './firebaseConfig';
 import "../node_modules/bootstrap/dist/css/bootstrap.css";
 
-const LoginPage = lazy(() => import("./components/authorization/login"))
+const LoginPage = lazy(() => import("./components/authorization/logIn"))
 const Signup = lazy(() => import("./components/authorization/signUp"))
 const Check = lazy(() => import("./components/authorization/check"))
 const SiteHeader = lazy(() => import("./components/Header"))
