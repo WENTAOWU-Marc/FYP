@@ -104,7 +104,7 @@ export default function AddRest() {
                     type:
                     <select name="type" onChange={handleChange}>
                         <option value="Chinese food">Chinese food</option>
-                        <option value="Western food">Western food</option>
+                        <option value="Western food">Ireland food</option>
                         <option value="American fast food">American fast food</option>
                     </select>
                 </p>

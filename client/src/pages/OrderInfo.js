@@ -1,17 +1,27 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import Map from '../components/map';
+import { geolocated } from "react-geolocated";
+
 
 var status = {
     1: 'Order placed',
     2: 'Order completed'
 }
 
-export default function OrderInfo () {
+function OrderInfo (props) {
     const us = useParams()
 
     const [info, setInfo] = useState({
         foods: []
     })
+
+    const [travelMode, setTravelMode] = useState("WALKING")
+
+    const places = [
+        { latitude: 52.2410691, longitude:  -7.13046 },
+        { latitude: 52.251691, longitude: -7.117269 }
+      ]
 
     useEffect(() => {
         var getList = () => {
@@ -24,6 +34,11 @@ export default function OrderInfo () {
         getList()
     }, [])
 
+
+    const changeTravelMode = (mode)=>{
+        console.log(mode)
+        setTravelMode(mode)
+    }
 
     return (
         <div>
@@ -43,7 +58,26 @@ export default function OrderInfo () {
                     <p>food name: {it.name} ,  food number: {it.number} , food price: {it.price} , food foodPrice: {it.foodPrice}</p>
                 </>)
             }
+            <Map
+        googleMapURL={
+          `https://maps.googleapis.com/maps/api/js?key=AIzaSyCVap7jbQhstEe08Re8WLX0BzIl6FZwH0o&v=3.exp&libraries=geometry,drawing,places`
+        }
+        markers={places}
+        loadingElement={<div style={{ height: `100%` }} />}
+        containerElement={<div style={{ height: "80vh" }} />}
+        mapElement={<div style={{ height: `100%` }} />}
+        defaultCenter={{ lat: 25.798939, lng: -80.291409 }}
+        defaultZoom={11}
+        travelMode={travelMode}
+      />
         </div>
     )
 }
 
+
+export default geolocated({
+    positionOptions: {
+        enableHighAccuracy: false,
+    },
+    userDecisionTimeout: 5000,
+})(OrderInfo)

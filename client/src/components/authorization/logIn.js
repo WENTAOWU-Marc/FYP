@@ -79,7 +79,7 @@ const Login = () => {
                     &nbsp;
                     <label>
                         <input type="radio" name="role" checked={user.role == '2'} value="2" onChange={handleChange} />
-                        merchants
+                        restaurants
                     </label>
                 </p>
                 <button type="submit">Login</button>
