@@ -1,6 +1,6 @@
 import { Card, Col, Row, InputNumber } from 'antd'
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useStorage } from 'reactfire';
 import 'firebase/auth'
 import 'firebase/storage';
@@ -34,7 +34,7 @@ export default function Food () {
         obj.number = e
         obj.foodPrice = Number(obj.number) * Number(obj.price)
         var newList = list.map(it => {
-            if (it._id == obj._id) {
+            if (it._id === obj._id) {
                 it = { ...obj }
             }
             return it

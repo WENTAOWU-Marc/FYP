@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import "../../globals/fontawesome";
 import "./siteHeader.css";
@@ -30,7 +30,7 @@ const SiteHeader = () => {
                     </Link>
                 </li>
                 {
-                    user && user.role == 2 &&
+                    user && user.role === 2 &&
                     <li className="nav-item li-no-style">
                         <Link className=" text-white" to="/postRest">
                             Add Restaurant

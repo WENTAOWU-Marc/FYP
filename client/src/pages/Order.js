@@ -1,6 +1,5 @@
-import { Card, Col, Row, InputNumber } from 'antd'
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 
 var status = {
@@ -10,7 +9,7 @@ var status = {
 
 export default function Food () {
     const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {}
-    const { restId } = useParams()
+    // const { restId } = useParams()
 
     const [list, setList] = useState([])
 
@@ -51,7 +50,7 @@ export default function Food () {
                         <th>Order TotalPrice</th>
                         <th>Order Status</th>
                         {
-                            user.role == 1 &&
+                            user.role === 1 &&
                             <th>Action</th>
                         }
                     </tr>
@@ -68,8 +67,8 @@ export default function Food () {
                                 <td>{status[it.status]}</td>
                                 <td>
                                     {
-                                        user.role == 1 && user._id == it.userId &&
-                                        <button disabled={it.status == 2} button onClick={() => changeStatus(it)} >Ok</button>
+                                        user.role === 1 && user._id === it.userId &&
+                                        <button disabled={it.status === 2} button onClick={() => changeStatus(it)} >Ok</button>
                                     }
                                 </td>
                             </tr>

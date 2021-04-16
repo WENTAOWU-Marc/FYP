@@ -40,7 +40,7 @@ const Login = () => {
         })
             .then(res => res.json())
             .then(res => {
-                if (res.code == 200) {
+                if (res.code === 200) {
                     var final = {
                         ...res.data,
                         role: user.role
@@ -72,13 +72,13 @@ const Login = () => {
                     &nbsp;
                     &nbsp;
                     <label>
-                        <input type="radio" name="role" checked={user.role == '1'} value="1" onChange={handleChange} />
+                        <input type="radio" name="role" checked={user.role === '1'} value="1" onChange={handleChange} />
                         consumers
                     </label>
                     &nbsp;
                     &nbsp;
                     <label>
-                        <input type="radio" name="role" checked={user.role == '2'} value="2" onChange={handleChange} />
+                        <input type="radio" name="role" checked={user.role === '2'} value="2" onChange={handleChange} />
                         restaurants
                     </label>
                 </p>

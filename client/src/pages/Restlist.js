@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react'
-import { Card, Avatar, Row, Col } from 'antd';
+import React, { useState, useEffect } from 'react'
+import { Card, Row, Col } from 'antd';
 import { Link } from 'react-router-dom';
 
 export default function RestList() {
@@ -29,15 +29,15 @@ export default function RestList() {
     //     };
     // }
 
-    const contentStyle = {
-        width: "100%",
-        height: '460px',
-        color: '#fff',
-        lineHeight: '460px',
-        textAlign: 'center',
-        background: '#364d79',
-        margin: '20px',
-    };
+    // const contentStyle = {
+    //     width: "100%",
+    //     height: '460px',
+    //     color: '#fff',
+    //     lineHeight: '460px',
+    //     textAlign: 'center',
+    //     background: '#364d79',
+    //     margin: '20px',
+    // };
 
     return (
         <>

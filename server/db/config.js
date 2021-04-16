@@ -7,7 +7,7 @@ mongoose.set('useFindAndModify', false)
 mongoose.Promise = global.Promise;
 
 //连接
-mongoose.connect(DB_URL);
+mongoose.connect(DB_URL,{useNewUrlParser:true,useUnifiedTopology: true});
 
 //连接成功
 db.on('connected', function () {

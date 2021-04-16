@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import { useFirebaseApp } from 'reactfire';
+// import { useFirebaseApp } from 'reactfire';
 import 'firebase/auth';
 
 
 export default function UserInfo () {
 
-    const firebase = useFirebaseApp()
+    // const firebase = useFirebaseApp()
 
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')))
 
