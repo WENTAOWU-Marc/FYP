@@ -50,7 +50,7 @@ export default function Food () {
                         <th>Order TotalPrice</th>
                         <th>Order Status</th>
                         {
-                            user.role === 1 &&
+                            user.role == 1 &&
                             <th>Action</th>
                         }
                     </tr>
@@ -67,8 +67,8 @@ export default function Food () {
                                 <td>{status[it.status]}</td>
                                 <td>
                                     {
-                                        user.role === 1 && user._id === it.userId &&
-                                        <button disabled={it.status === 2} button onClick={() => changeStatus(it)} >Ok</button>
+                                        user.role == 1 && user._id == it.userId &&
+                                        <button disabled={it.status == 2} button onClick={() => changeStatus(it)} >Ok</button>
                                     }
                                 </td>
                             </tr>

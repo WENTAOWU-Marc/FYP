@@ -32,7 +32,7 @@ function MapDirectionsRenderer(props) {
       },
       (result, status) => {
         console.log(result)
-        if (status === google.maps.DirectionsStatus.OK) {
+        if (status == google.maps.DirectionsStatus.OK) {
           setDirections(result);
         } else {
           setError(result);

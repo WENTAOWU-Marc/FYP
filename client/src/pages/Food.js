@@ -34,7 +34,7 @@ export default function Food () {
         obj.number = e
         obj.foodPrice = Number(obj.number) * Number(obj.price)
         var newList = list.map(it => {
-            if (it._id === obj._id) {
+            if (it._id == obj._id) {
                 it = { ...obj }
             }
             return it
