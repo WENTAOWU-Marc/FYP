@@ -67,6 +67,28 @@ router.post('/update', function (req, res, next) {
     })
 });
 
+router.get('/:id',function (req, res, next){
+    var { _id } = req.query
+    if (_id) {
+        restsSchema.find(
+            { _id },
+            (err, doc) => {
+                console.log('err -> :', err)
+                var raw = doc[0].latitude + " " + doc[0].longitude
+                var split = raw.split(" ")
+                res.json({ code: 200, data: split })
+            })
+    } else {
+        restsSchema.find(
+            {},
+            (err, doc) => {
+                console.log('err -> :', err)
+                var raw = doc[0].latitude + " " + doc[0].longitude
+                var split = raw.split(" ")
+                res.json({ code: 200, data: split })
+            })
+    }
 
+});
 
 module.exports = router;

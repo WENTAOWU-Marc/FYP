@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Card, Avatar, Row, Col } from 'antd';
 import { Link } from 'react-router-dom';
 
-export default function RestList () {
+export default function RestList() {
     const [list, setList] = useState([])
     useEffect(() => {
         var getList = () => {
@@ -17,6 +17,17 @@ export default function RestList () {
         getList()
     }, [])
 
+    // const FilterControls = props => {
+
+    //     const handleChange = (e, type, value) => {
+    //         e.preventDefault();
+    //         props.onUserInput(type, value);
+    //     };
+
+    //     const handleTextChange = e => {
+    //         handleChange(e, "name", e.target.value);
+    //     };
+    // }
 
     const contentStyle = {
         width: "100%",
@@ -30,6 +41,17 @@ export default function RestList () {
 
     return (
         <>
+            {/* <div className="row bg-warning">
+                <div className="col-md-12">
+                    <h4>
+                        <span>List Filtering:</span>
+                        <input
+                            type="text"
+                            placeholder="Name Search"
+                        />
+                    </h4>
+                </div>
+            </div> */}
             <Row style={{ margin: '10px' }} gutter={16}>
                 {
                     list.map((it, index) => (

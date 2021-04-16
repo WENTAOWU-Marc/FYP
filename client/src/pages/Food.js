@@ -29,6 +29,7 @@ export default function Food () {
             [e.target.name]: e.target.value,
         })
     }
+
     const onChange = (e, obj, index) => {
         obj.number = e
         obj.foodPrice = Number(obj.number) * Number(obj.price)
@@ -41,8 +42,8 @@ export default function Food () {
         setList([
             ...newList
         ])
-
     }
+
     const editInfo = (e) => {
         setFood({ ...e })
     }
@@ -219,7 +220,6 @@ export default function Food () {
             }
 
             <div>
-                <div><button type="button" onClick={() => toBuy()}> Buy </button></div>
                 <Row style={{ margin: '10px' }} gutter={16}>
                     {
                         list.map((it, index) => (
@@ -242,7 +242,7 @@ export default function Food () {
                                         description={it.type}
                                     />
                                     <p>$ {it.price}</p>
-                                    <InputNumber min={1} onChange={(e) => onChange(e, it, index)} />
+                                    <InputNumber onChange={(e) => onChange(e, it, index)} />
                                     <p>$ {it.foodPrice}</p>
                                 </Card>
                             </Col>
@@ -250,7 +250,7 @@ export default function Food () {
                     }
                 </Row>
             </div >
-
+            <div><button type="button" onClick={() => toBuy()}> Buy </button></div>
         </div >
     )
 }
