@@ -5,7 +5,7 @@ import { useStorage } from 'reactfire';
 import 'firebase/auth'
 import 'firebase/storage';
 
-export default function Food () {
+export default function Food() {
     const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : ''
     const { restId } = useParams()
 
@@ -57,9 +57,9 @@ export default function Food () {
 
     const toBuy = e => {
 
-        // if (!user) {
-        //     window.location.href = '/login'
-        // }
+        if (!user) {
+            window.location.href = '/login'
+        }
 
         var foodsList = list.filter(it => it.number).map((it, index) => ({
             number: it.number,
@@ -210,8 +210,8 @@ export default function Food () {
                         <p>
                             type:
                         <select name="type" value={food.type} onChange={handleChange}>
-                                <option value="vegetables">vegetables</option>
                                 <option value="meat">meat</option>
+                                <option value="vegetables">vegetables</option>
                             </select>
                         </p>
                         <button type="submit">Create</button>

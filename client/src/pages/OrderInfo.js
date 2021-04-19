@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Map from '../components/map';
+import ButtonGroup from '../components/buttonGroup'
 import { geolocated } from "react-geolocated";
 
 
@@ -73,7 +74,6 @@ function OrderInfo(props) {
         getList()
     }, [])
 
-
     const changeTravelMode = (mode) => {
         setTravelMode(mode)
     }
@@ -97,6 +97,7 @@ function OrderInfo(props) {
                 </>)
             }
             <h1> Route </h1>
+            <ButtonGroup changeTravelMode={changeTravelMode}/>
             {((! isNaN(places[0].latitude)) && (! isNaN(places[0].longitude)) &&  (! isNaN(places[1].latitude)) && (! isNaN(places[1].longitude))) && (
                 <Map
                     googleMapURL={
