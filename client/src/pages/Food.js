@@ -113,25 +113,84 @@ export default function Food() {
 
         var imgUrl = ''
 
-        var uploadTask = storageRef.child('foods/' + file.file.name).put(file.file, {
-            contentType: 'image/png'
-        }).then((snapshot) => {
-            var downRef = storageRef.child('foods/' + file.file.name)
-            downRef.getDownloadURL().then(function (imgUrl) {
-                imgUrl = imgUrl;
-                if (
-                    !food.name ||
-                    !food.type ||
-                    !food.price
-                ) {
-                    seterror('Parameter cannot be empty');
-                    return false;
-                }
+        if (file) {
+            var uploadTask = storageRef.child('foods/' + file.file.name).put(file.file, {
+                contentType: 'image/png'
+            }).then((snapshot) => {
+                var downRef = storageRef.child('foods/' + file.file.name)
+                downRef.getDownloadURL().then(function (imgUrl) {
+                    imgUrl = imgUrl;
+                    if (
+                        !food.name ||
+                        !food.type ||
+                        !food.price
+                    ) {
+                        seterror('Parameter cannot be empty');
+                        return false;
+                    }
 
-                food.price = Number(food.price)
-                var fdata = { ...food }
-                fdata.imgUrl = imgUrl
-                console.log('shop -> :', fdata)
+                    food.price = Number(food.price)
+                    var fdata = { ...food }
+                    fdata.imgUrl = imgUrl
+                    console.log('shop -> :', fdata)
+
+                    if (fdata._id) {
+                        fetch('/food/update', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(fdata)
+                        })
+                            .then(res => res.json())
+                            .then(res => {
+                                window.location.reload()
+                            })
+                    } else {
+
+                        fetch('/food/add', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(fdata)
+                        })
+                            .then(res => res.json())
+                            .then(res => {
+                                window.location.reload()
+                            })
+                    }
+
+                })
+            });
+        } else {
+            if (
+                !food.name ||
+                !food.type ||
+                !food.price
+            ) {
+                seterror('Parameter cannot be empty');
+                return false;
+            }
+
+            food.price = Number(food.price)
+            var fdata = { ...food }
+            fdata.imgUrl = food.imgUrl
+            console.log('shop -> :', fdata)
+
+            if (fdata._id) {
+                fetch('/food/update', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(fdata)
+                })
+                    .then(res => res.json())
+                    .then(res => {
+                        window.location.reload()
+                    })
+            } else {
 
                 fetch('/food/add', {
                     method: 'POST',
@@ -144,8 +203,9 @@ export default function Food() {
                     .then(res => {
                         window.location.reload()
                     })
-            })
-        });
+            }
+
+        }
 
     }
 
@@ -214,7 +274,7 @@ export default function Food() {
                                 <option value="vegetables">vegetables</option>
                             </select>
                         </p>
-                        <button type="submit">Create</button>
+                        <button type="submit">{food._id ? 'Save' : 'Create'}</button>
                     </form>
                 </div>
             }

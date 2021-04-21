@@ -57,7 +57,7 @@ router.post('/update', function (req, res, next) {
     })
 });
 router.get('/del', function (req, res, next) {
-    var { _id } = req.body;
+    var { _id } = req.query;
 
     foodsSchema.findByIdAndRemove(_id, function (err, doc) {
         return res.send({ code: 200, msg: 'success' })
