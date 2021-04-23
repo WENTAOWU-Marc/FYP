@@ -51,17 +51,17 @@ export default function UserInfo () {
 
     return (
         <div>
-            <form action="">
-                <p>Name:<input type="text" name="name" value={user.name} onChange={changeVal} /></p>
-                <p>email:<input type="text" name="email" value={user.email} onChange={changeVal} /></p>
-                <p>address:<input type="text" name="address" value={user.address} onChange={changeVal} /></p>
+            <form action="" className="form-group">
+                <p className="text-uppercase">Name:<input type="text" className="form-control" name="name" value={user.name} onChange={changeVal} /></p>
+                <p className="text-uppercase">email:<input type="text" className="form-control" name="email" value={user.email} onChange={changeVal} /></p>
+                <p className="text-uppercase">address:<input type="text" className="form-control" name="address" value={user.address} onChange={changeVal} /></p>
 
-                <p>tel:<input type="text" name="tel" value={user.tel} onChange={changeVal} /></p>
+                <p className="text-uppercase">tel:<input type="text" className="form-control" name="tel" value={user.tel} onChange={changeVal} /></p>
 
-                <p>latitude:<input type="text" name="latitude" value={user.latitude} onChange={changeVal} /></p>
-                <p>longitude:<input type="text" name="longitude" value={user.longitude} onChange={changeVal} /></p>
-                <p>
-                    <button type="button" onClick={sumit}>submit</button>
+                <p className="text-uppercase">latitude:<input type="text" className="form-control" name="latitude" value={user.latitude} onChange={changeVal} /></p>
+                <p className="text-uppercase">longitude:<input type="text" className="form-control" name="longitude" value={user.longitude} onChange={changeVal} /></p>
+                <p >
+                    <button type="button" className="btn btn-info" onClick={sumit}>submit</button>
                 </p>
             </form>
         </div>

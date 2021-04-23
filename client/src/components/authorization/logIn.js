@@ -57,22 +57,24 @@ const Login = () => {
     return (
         <>
             <h1>Log In</h1>
-            <form onSubmit={handleSubmit}>
-                <p>
-                    Email:
-                    <input type="text" placeholder="Email" name="email" onChange={handleChange} /><br />
+            <form onSubmit={handleSubmit} className="form-group">
+                <p className="text-uppercase">
+                    Email:&nbsp;&nbsp;
+                    &nbsp;&nbsp;
+                    <input type="text" className="form-control" placeholder="Input Email" name="email" onChange={handleChange} /><br />
                 </p>
-                <p>
-                    password:
-                    <input type="password" placeholder="Password" name="password" onChange={handleChange} /><br />
+                <p className="text-uppercase">
+                    password:&nbsp;&nbsp;
+                    &nbsp;&nbsp;
+                    <input type="password" className="form-control" placeholder="Input Password" name="password" onChange={handleChange} /><br />
                 </p>
 
-                <p>
+                <p className="text-uppercase">
                     identity role:
                     &nbsp;
                     &nbsp;
                     <label>
-                        <input type="radio" name="role" checked={user.role == '1'} value="1" onChange={handleChange} />
+                        <input type="radio"  name="role" checked={user.role == '1'} value="1" onChange={handleChange} />
                         consumers
                     </label>
                     &nbsp;
@@ -82,11 +84,13 @@ const Login = () => {
                         merchants
                     </label>
                 </p>
-                <button type="submit">Login</button>
+                <button type="submit" className="btn btn-info">Login</button>&nbsp;
+                    &nbsp;
+                    <Link to='/check'>
+                        <button className="btn btn-info">Sign up</button>
+                    </Link>
             </form>
-            <Link to='/check'>
-                <button>Sign up</button>
-            </Link>
+
             {error && <h4>{error}</h4>}
         </>
     )

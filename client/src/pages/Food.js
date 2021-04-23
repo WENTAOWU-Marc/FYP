@@ -209,6 +209,20 @@ export default function Food() {
 
     }
 
+    const style1 = {
+        marginRight: '160px'
+    }
+
+    const style2 = {
+        marginLeft: '20px',
+        marginRight: '160px'
+
+    }
+    const style3 = {
+        width: '100%',
+        height: '250px'
+
+    }
 
     useEffect(() => {
         var getlist = () => {
@@ -235,46 +249,69 @@ export default function Food() {
     }, [])
 
     return (
-        <div>
-            <div>
-                <p>
-                    Name:{info.name}
-                </p>
-                <p>
-                    address:{info.address}
-                </p>
-                <p>
-                    tel:{info.tel}
-                </p>
-                <p>
-                    type:{info.type}
-                </p>
+        <div >
+            <div className="panel panel-default shadow p-3 mb-5 bg-white rounded">
+                <label style={style2}>
+                    <div >
+                        <h4 className="panel-body">
+                            Name
+                          </h4>
+                        <div className="panel-footer">{info.name}</div>
+                    </div>
+
+                </label>
+
+                <label style={style1}>
+                    <div>
+                        <h4 className="panel-body">
+                            Address
+                          </h4>
+                        <div className="panel-footer">{info.address}</div>
+                    </div>
+                </label>
+                <label style={style1}>
+                    <div >
+                        <h4 className="panel-body">
+                            Tel
+                          </h4>
+                        <div className="panel-footer">{info.tel}</div>
+                    </div>
+                </label>
+                <label >
+                    <div >
+                        <h4 className="panel-body">
+                            Type
+                          </h4>
+                        <div className="panel-footer">{info.type}</div>
+                    </div>
+                </label>
             </div>
+
             {
                 user && user.role == 2 &&
-                <div>
+                  <div className="shadow p-3 mb-5 bg-white rounded">
                     <h1>Create a foods</h1>
-                    <form onSubmit={handleSubmit}>
-                        <p>
+                    <form onSubmit={handleSubmit} className="form-group">
+                        <p className="text-uppercase">
                             name:
-                        <input type="text" value={food.name} placeholder="Name" name="name" onChange={handleChange} />
+                        <input type="text" value={food.name} className="form-control" placeholder="Name" name="name" onChange={handleChange} />
                         </p>
-                        <p>
-                            imgUrl:
+                        <p className="text-uppercase">
+                            imgUrl:&nbsp;&nbsp;
                         <input type="file" name="file" onChange={fileChange} />
                         </p>
-                        <p>
+                        <p className="text-uppercase">
                             price:
-                        <input type="number" value={food.price} placeholder="price" name="price" onChange={handleChange} />
+                        <input type="number" value={food.price} className="form-control" placeholder="price" name="price" onChange={handleChange} />
                         </p>
-                        <p>
-                            type:
+                        <p className="text-uppercase">
+                            type:&nbsp;&nbsp;
                         <select name="type" value={food.type} onChange={handleChange}>
                                 <option value="meat">meat</option>
                                 <option value="vegetables">vegetables</option>
                             </select>
                         </p>
-                        <button type="submit">{food._id ? 'Save' : 'Create'}</button>
+                        <button type="submit" className="btn btn-info">Create</button>
                     </form>
                 </div>
             }
@@ -288,6 +325,7 @@ export default function Food() {
                                     hoverable
                                     cover={
                                         <img
+                                            style={style3}
                                             alt="example"
                                             src={it.imgUrl}
                                         />
@@ -310,7 +348,7 @@ export default function Food() {
                     }
                 </Row>
             </div >
-            <div><button type="button" onClick={() => toBuy()}> Buy </button></div>
+            <div><button style={style2} type="button" className="btn btn-info" onClick={() => toBuy()}> Buy </button></div>
         </div >
     )
 }

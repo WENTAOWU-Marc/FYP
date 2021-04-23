@@ -47,12 +47,12 @@ export default function Check () {
     return (
         <>
             <h1>Check Email</h1>
-            <form onSubmit={handleSubmit}>
-                <p>
+            <form onSubmit={handleSubmit} className="form-group">
+                <p className="text-uppercase">
                     email:
-                    <input type="text" placeholder="Email" name="email" onChange={handleChange} />
+                    <input type="text" className="form-control" placeholder="Email" name="email" onChange={handleChange} />
                 </p>
-                <button type="submit">Check</button>
+                <button type="submit" className="btn btn-info">Check</button>
             </form>
             {user.error && <h4>{user.error}</h4>}
 

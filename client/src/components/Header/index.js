@@ -15,10 +15,14 @@ const SiteHeader = () => {
         window.location.replace("/");
     }
 
+    const style1={    
+          height:"60px"
+    
+    }
     return (
 
-        <nav className="navbar  navbar-light fixed-top  bg-dark ">
-            <ul className="navbar-brand text-white clearfix"  >
+        <nav className="navbar  navbar-light fixed-top  bg-info " style={style1}>
+            <ul className="navbar-brand text-white clearfix" style={{marginTop:15}} >
                 <li className="nav-item li-no-style">
                     <Link className=" text-white" to="/">
                         Home

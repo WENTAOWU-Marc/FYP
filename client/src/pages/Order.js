@@ -40,7 +40,7 @@ export default function Food () {
 
     return (
         <div>
-            <table className="table">
+            <table className="table table-hover table-bordered">
                 <thead>
                     <tr>
                         <th>Index</th>
@@ -68,7 +68,7 @@ export default function Food () {
                                 <td>
                                     {
                                         user.role == 1 && user._id == it.userId &&
-                                        <button disabled={it.status == 2} button onClick={() => changeStatus(it)} >Ok</button>
+                                        <button className="btn btn-info" disabled={it.status == 2} button onClick={() => changeStatus(it)} >Ok</button>
                                     }
                                 </td>
                             </tr>

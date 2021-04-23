@@ -83,42 +83,43 @@ export default function AddRest() {
         <div>
             <h1>Create a restaurant</h1>
 
-            <form onSubmit={handleSubmit}>
-                <p>
+            <form onSubmit={handleSubmit} className="form-group">
+                <p className="text-uppercase">
                     name:
-                    <input type="text" placeholder="Name" name="name" onChange={handleChange} />
+                    <input type="text" className="form-control" placeholder="Input Name" name="name" onChange={handleChange} />
                 </p>
-                <p>
-                    imgUrl:
-                    <input type="file" name="file" onChange={fileChange} />
+                <p className="text-uppercase">
+                    imgUrl:                 
                 </p>
-                <p>
+                <input type="file" name="file" onChange={fileChange} />
+                <p></p>
+                <p className="text-uppercase">
                     address:
-                    <input type="text" placeholder="address" name="address" onChange={handleChange} />
+                    <input type="text" className="form-control" placeholder="Input address" name="address" onChange={handleChange} />
                 </p>
-                <p>
+                <p className="text-uppercase">
                     tel:
-                    <input type="tel" placeholder="tel" name="tel" onChange={handleChange} />
+                    <input type="tel" className="form-control" placeholder="Input tel" name="tel" onChange={handleChange} />
                 </p>
-                <p>
+                <p className="text-uppercase">
                     type:
-                    <select name="type" onChange={handleChange}>
+                    <select name="type" onChange={handleChange} className="form-control" >
                         <option value="Chinese food">Chinese food</option>
                         <option value="Western food">Ireland food</option>
                         <option value="American fast food">American fast food</option>
                     </select>
                 </p>
 
-                <p>
+                <p className="text-uppercase">
                     longitude:
-                    <input type="number" step="0.0000001" placeholder="longitude" name="longitude" onChange={handleChange} />
+                    <input type="number" className="form-control" step="0.0000001" placeholder="Input longitude" name="longitude" onChange={handleChange} />
                 </p>
-                <p>
+                <p className="text-uppercase">
                     latitude:
-                    <input type="number" step="0.0000001" placeholder="latitude" name="latitude" onChange={handleChange} />
+                    <input type="number" className="form-control" step="0.0000001" placeholder="Input latitude" name="latitude" onChange={handleChange} />
                 </p>
 
-                <button type="submit">Create</button>
+                <button type="submit" className="btn btn-info">Create</button>
 
             </form>
             {error && <h4>{error}</h4>}

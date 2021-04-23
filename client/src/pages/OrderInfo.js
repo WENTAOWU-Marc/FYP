@@ -79,21 +79,21 @@ function OrderInfo(props) {
     }
 
     return (
-        <div>
-            <p>restName: {info.restName}</p>
-            <p>restTel: {info.restTel}</p>
-            <p>restAddress: {info.restAddress}</p>
+        <div className="shadow p-3 mb-5 bg-white rounded">
+            <p className="text-uppercase">restName: {info.restName}</p>
+            <p className="text-uppercase">restTel: {info.restTel}</p>
+            <p className="text-uppercase">restAddress: {info.restAddress}</p>
             <br />
-            <p>userName: {info.userName}</p>
-            <p>userTel: {info.userTel}</p>
-            <p>userAddress: {info.userAddress}</p>
-            <p>totalPrice: ${info.totalPrice}</p>
-            <p>status: {status[info.status]}</p>
+            <p className="text-uppercase">userName: {info.userName}</p>
+            <p className="text-uppercase">userTel: {info.userTel}</p>
+            <p className="text-uppercase">userAddress: {info.userAddress}</p>
+            <p className="text-uppercase">totalPrice: ${info.totalPrice}</p>
+            <p className="text-uppercase">status: {status[info.status]}</p>
             <br />
             <h1> Foods </h1>
             {
                 info.foods.map((it, index) => <>
-                    <p>food name: {it.name} ,  food number: {it.number} , food price: {it.price} , food foodPrice: {it.foodPrice}</p>
+                    <p className="text-uppercase">food name: {it.name} ,  food number: {it.number} , food price: {it.price} , food foodPrice: {it.foodPrice}</p>
                 </>)
             }
             <h1> Route </h1>

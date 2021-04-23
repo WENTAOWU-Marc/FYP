@@ -6,7 +6,7 @@ function ButtonGroups(props) {
     return (
         <>
             {travel_modes.map((mode, index) => (
-                <button onClick={() =>changeTravelMode(mode)}>{mode}</button>
+                <button className="btn btn-info" style={{marginRight: 20,marginBottom: 20,}} onClick={() =>changeTravelMode(mode)}>{mode}</button>
             ))}
         </>
     )
