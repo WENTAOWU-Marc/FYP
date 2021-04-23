@@ -18,7 +18,7 @@ export default function Food() {
     const [food, setFood] = useState({
         restId,
         name: '',
-        type: 'vegetables',
+        type: 'meat',
         price: 0,
         _id: '',
     });

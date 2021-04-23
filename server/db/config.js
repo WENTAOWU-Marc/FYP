@@ -1,6 +1,6 @@
 var mongoose = require('mongoose'),
     db = mongoose.connection,
-    DB_URL = 'mongodb://localhost:27017/eat';
+    DB_URL = 'mongodb+srv://WWT:990522@cluster0.ujvrm.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 
 mongoose.set('useFindAndModify', false)
 
