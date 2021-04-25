@@ -80,10 +80,12 @@ function OrderInfo(props) {
 
     return (
         <div className="shadow p-3 mb-5 bg-white rounded">
+            <h1> Restaurant Info </h1>
             <p className="text-uppercase">restName: {info.restName}</p>
             <p className="text-uppercase">restTel: {info.restTel}</p>
             <p className="text-uppercase">restAddress: {info.restAddress}</p>
             <br />
+            <h1> User Info </h1>
             <p className="text-uppercase">userName: {info.userName}</p>
             <p className="text-uppercase">userTel: {info.userTel}</p>
             <p className="text-uppercase">userAddress: {info.userAddress}</p>
@@ -97,8 +99,8 @@ function OrderInfo(props) {
                 </>)
             }
             <h1> Route </h1>
-            <ButtonGroup changeTravelMode={changeTravelMode}/>
-            {((! isNaN(places[0].latitude)) && (! isNaN(places[0].longitude)) &&  (! isNaN(places[1].latitude)) && (! isNaN(places[1].longitude))) && (
+            <ButtonGroup changeTravelMode={changeTravelMode} />
+            {((!isNaN(places[0].latitude)) && (!isNaN(places[0].longitude)) && (!isNaN(places[1].latitude)) && (!isNaN(places[1].longitude))) && (
                 <Map
                     googleMapURL={
                         `https://maps.googleapis.com/maps/api/js?key=AIzaSyCVap7jbQhstEe08Re8WLX0BzIl6FZwH0o&v=3.exp&libraries=geometry,drawing,places`

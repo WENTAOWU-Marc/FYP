@@ -311,7 +311,7 @@ export default function Food() {
                                 <option value="vegetables">vegetables</option>
                             </select>
                         </p>
-                        <button type="submit" className="btn btn-info">Create</button>
+                        <button type="submit" className="btn btn-info">{food._id ? 'Save' : 'Create'}</button>
                     </form>
                 </div>
             }
