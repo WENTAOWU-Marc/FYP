@@ -23,10 +23,13 @@ describe("User profile Page", () => {
             cy.get("input").eq(0).clear();
             cy.get("input").eq(0).type(newname);
             cy.get("button").eq(0).click();
+            cy.wait(1500);
             cy.get("nav").find("nav").find("a").click();
+            cy.wait(1500);
             cy.get("input").eq(0).type(email);
             cy.get("input").eq(1).type(password);
             cy.get("button").eq(0).click();
+            cy.wait(1500);
             cy.get("nav").find("nav").should("have.text","WellCome,  Marc1Logout");
         });
     });

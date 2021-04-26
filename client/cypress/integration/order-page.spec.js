@@ -27,7 +27,7 @@ describe("Orderlist and order Page", () => {
             cy.get("h1").eq(0).should("have.text", " Restaurant Info ");
         });
 
-        it.only("can be access to the map", () => {
+        it("can be access to the map", () => {
             cy.get("nav").find("a").eq(2).click();
             cy.wait(1500);
             cy.get("div").find("td").find("a").eq(0).click();

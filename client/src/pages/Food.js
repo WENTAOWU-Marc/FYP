@@ -290,7 +290,7 @@ export default function Food() {
             {
                 user && user.role == 2 &&
                   <div className="shadow p-3 mb-5 bg-white rounded">
-                    <h1>Create a foods</h1>
+                    <h1>{food._id ? 'Manage dish' : 'Create dish '}</h1>
                     <form onSubmit={handleSubmit} className="form-group">
                         <p className="text-uppercase">
                             name:
