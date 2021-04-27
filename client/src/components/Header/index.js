@@ -25,7 +25,7 @@ const SiteHeader = () => {
             <ul className="navbar-brand text-white clearfix" style={{marginTop:15}} >
                 <li className="nav-item li-no-style">
                     <Link className=" text-white" to="/">
-                        Home
+                        Homepage
                     </Link>
                 </li>
                 <li className="nav-item li-no-style">
